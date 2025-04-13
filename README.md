@@ -18,6 +18,12 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 
 ---
 
+## 🏗️ Architecture Diagram
+
+![Architecture](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/Architecture.jpg)
+
+---
+
 ## 🧩 Common Configuration
 
 ### ✅ Step 1: Create a Security Group (For both Frontend & Backend)
@@ -33,6 +39,10 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 
 #### 📸 Output Screenshots
 
+![SG_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/SG_01.png)
+![SG_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/SG_02.png)
+![SG_03](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/SG_03.png)
+![SG_04](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/SG_04.png)
 
 ---
 
@@ -73,6 +83,11 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 
 #### 📸 Output Screenshots
 
+![LT_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/LT_01.png)
+![LT_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/LT_02.png)
+![LT_03](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/LT_03.png)
+![LT_04](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/LT_04.png)
+![LT_05](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/LT_05.png)
 
 ---
 
@@ -87,6 +102,8 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 
 #### 📸 Output Screenshots
 
+![TG_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/TG_01.png)
+![TG_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/TG_02.png)
 
 ---
 
@@ -103,6 +120,9 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 
 #### 📸 Output Screenshots
 
+![LB_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/LB_01.png)
+![LB_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/LB_02.png)
+![LB_03](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/LB_03.png)
 
 ---
 
@@ -126,6 +146,25 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 
 #### 📸 Output Screenshots 
 
+![ASG_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_01.png)
+![ASG_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_02.png)
+![ASG_03](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_03.png)
+![ASG_04](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_04.png)
+![ASG_05](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_05.png)
+![ASG_06](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_06.png)
+![ASG_07](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_07.png)
+![ASG_08](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_08.png)
+![ASG_09](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_09.png)
+![ASG_10](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_10.png)
+![ASG_11](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_11.png)
+![ASG_12](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_12.png)
+![ASG_13](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_13.png)
+![ASG_14](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_14.png)
+![ASG_15](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_15.png)
+![ASG_16](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_16.png)
+![ASG_17](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_17.png)
+![ASG_18](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_18.png)
+![ASG_19](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/ASG_19.png)
 
 ---
 
@@ -142,6 +181,11 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 4. Test:
    - Visit: `http://backendsubdomainname.yourdomainname.com` or `http://backendsubdomainname.yourdomainname.com/trip`
    - ✅ If you get a response, backend is successfully configured!
+  
+#### 📸 Output Screenshots 
+
+![BCC_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/BCC_01.png)
+![BCC_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/BCC_02.png)
 
 ---
 
@@ -184,6 +228,11 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 
 #### 📸 Output Screenshots 
 
+![FEC2_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FEC2_01.png)
+![FEC2_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FEC2_02.png)
+![FEC2_03](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FEC2_03.png)
+![FEC2_04](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FEC2_04.png)
+![FEC2_05](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FEC2_05.png)
 
 ---
 
@@ -200,6 +249,14 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 4. Test:
    - Visit: `http://frontendsubdomainname.yourdomainname.com`
    - ✅ If frontend loads and you are able to create a trip record, your setup is successful!
+
+#### 📸 Output Screenshots 
+
+![FCC_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_01.png)
+![FCC_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_02.png)
+![FCC_03](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_03.png)
+![FCC_04](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_04.png)
+![FCC_05](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_05.png)
 
 ---
 
