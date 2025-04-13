@@ -184,7 +184,7 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
   
 #### 📸 Output Screenshots 
 
-![BCC_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/BCC_01.png)
+![BCC_01_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/BCC_01_01.png)
 ![BCC_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/BCC_02.png)
 
 ---
@@ -252,7 +252,7 @@ Guide Users to **Fork this repository** and follow step-by-step instructions to 
 
 #### 📸 Output Screenshots 
 
-![FCC_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_01.png)
+![FCC_01_01](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_01_01.png)
 ![FCC_02](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_02.png)
 ![FCC_03](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_03.png)
 ![FCC_04](https://github.com/JOYSTON-LEWIS/My-Media-Repository/blob/main/Assignment_04_DevOps_Outputs_Images/FCC_04.png)
