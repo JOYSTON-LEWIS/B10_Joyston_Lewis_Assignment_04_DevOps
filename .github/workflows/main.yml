@@ -11,97 +11,94 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout GitHub Repository
-      uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Set up SSH Key
-      run: |
-        echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > private_key.pem
-        chmod 600 private_key.pem
+      - name: Add SSH Key
+        run: |
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
 
-    - name: SSH and Deploy to EC2
-      run: |
-        ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_PRIVATE_IP }} << 'EOF'
-          set -e
+      - name: SSH and deploy on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_PRIVATE_IP }} << 'EOF'
+            set -e
 
-          echo "🔧 Installing required software..."
-          sudo apt update
-          command -v git || sudo apt install -y git
-          command -v nginx || sudo apt install -y nginx
-          if ! command -v node || [[ "$(node -v)" != v20* ]]; then
-            curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-            sudo apt install -y nodejs
-          fi
-          command -v docker || curl -fsSL https://get.docker.com | sh
+            echo "🔧 Installing necessary packages..."
+            sudo apt update -y
+            sudo apt install -y git nginx
 
-          echo "🗂 Creating project directories..."
-          mkdir -p ~/Backend ~/Frontend
+            if ! command -v node || [[ "$(node -v)" != v20* ]]; then
+              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+              sudo apt install -y nodejs
+            fi
 
-          ##########################################
-          ## 🛠 BACKEND DEPLOYMENT (PRIORITY FIRST)
-          ##########################################
+            command -v docker || curl -fsSL https://get.docker.com | sh
 
-          echo "📦 Cloning Backend Repo..."
-          cd ~/Backend
-          rm -rf B10_Joyston_Lewis_Assignment_04_DevOps
-          git clone https://github.com/JOYSTON-LEWIS/B10_Joyston_Lewis_Assignment_04_DevOps
-          cd B10_Joyston_Lewis_Assignment_04_DevOps
-          git checkout Backend
+            echo "📁 Creating folders..."
+            mkdir -p ~/Backend ~/Frontend
 
-          echo "🛑 Stopping old Backend container..."
-          docker stop ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
-          docker rm ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
+            ##########################################
+            ## Backend Deployment
+            ##########################################
+            echo "📦 Cloning backend repo..."
+            cd ~/Backend
+            rm -rf B10_Joyston_Lewis_Assignment_04_DevOps
+            git clone https://github.com/JOYSTON-LEWIS/B10_Joyston_Lewis_Assignment_04_DevOps
+            cd B10_Joyston_Lewis_Assignment_04_DevOps
+            git checkout Backend
 
-          echo "📄 Creating Backend Dockerfile..."
-          cat <<BACKENDEOF > Dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install --omit=dev
-COPY . .
-ENV PORT=3001
-ENV MONGO_URI=${{ secrets.MONGO_DB_CLUSTER_SECRET_KEY }}
-EXPOSE 3001
-CMD ["node", "index.js"]
-BACKENDEOF
+            echo "🛑 Stopping old backend container..."
+            docker stop ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
+            docker rm ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
 
-          echo "🐳 Building and running Backend container..."
-          docker build -t backend-app .
-          docker run -d --name ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} -p 3001:3001 backend-app
+            echo "📝 Creating backend Dockerfile..."
+            cat > Dockerfile <<EOL
+            FROM node:20-alpine
+            WORKDIR /app
+            COPY package*.json ./
+            RUN npm install --omit=dev
+            COPY . .
+            ENV PORT=3001
+            ENV MONGO_URI=${{ secrets.MONGO_DB_CLUSTER_SECRET_KEY }}
+            EXPOSE 3001
+            CMD ["node", "index.js"]
+            EOL
 
-          ##########################################
-          ## 🧑‍🎨 FRONTEND DEPLOYMENT (AFTER BACKEND)
-          ##########################################
+            echo "🐳 Building and running backend container..."
+            docker build -t backend-app .
+            docker run -d --name ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} -p 3001:3001 backend-app
 
-          echo "📦 Cloning Frontend Repo..."
-          cd ~/Frontend
-          rm -rf B10_Joyston_Lewis_Assignment_04_DevOps
-          git clone https://github.com/JOYSTON-LEWIS/B10_Joyston_Lewis_Assignment_04_DevOps
-          cd B10_Joyston_Lewis_Assignment_04_DevOps
-          git checkout Frontend
+            ##########################################
+            ## Frontend Deployment
+            ##########################################
+            echo "📦 Cloning frontend repo..."
+            cd ~/Frontend
+            rm -rf B10_Joyston_Lewis_Assignment_04_DevOps
+            git clone https://github.com/JOYSTON-LEWIS/B10_Joyston_Lewis_Assignment_04_DevOps
+            cd B10_Joyston_Lewis_Assignment_04_DevOps
+            git checkout Frontend
 
-          echo "🛑 Stopping old Frontend container..."
-          docker stop ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
-          docker rm ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
+            echo "🛑 Stopping old frontend container..."
+            docker stop ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
+            docker rm ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
 
-          echo "🌍 Creating .env file for Frontend..."
-          echo "VITE_API_BASE_URL=http://${{ secrets.EC2_PRIVATE_IP }}:3001" > .env
-          echo "✅ .env created."
+            echo "🌍 Creating .env file for frontend..."
+            echo "VITE_API_BASE_URL=http://${{ secrets.EC2_PRIVATE_IP }}:3001" > .env
 
-          echo "📄 Creating Frontend Dockerfile..."
-          cat <<FRONTENDEOF > Dockerfile
-FROM node:20
-WORKDIR /app
-COPY . .
-RUN npm install
-EXPOSE 3000
-CMD ["npm", "run", "dev", "--", "--port", "3000", "--host"]
-FRONTENDEOF
+            echo "📝 Creating frontend Dockerfile..."
+            cat > Dockerfile <<EOL
+            FROM node:20
+            WORKDIR /app
+            COPY . .
+            RUN npm install
+            EXPOSE 3000
+            CMD ["npm", "run", "dev", "--", "--port", "3000", "--host"]
+            EOL
 
-          echo "🐳 Building and running Frontend container..."
-          docker build -t frontend-app .
-          docker run -d --name ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} -p 3000:3000 frontend-app
+            echo "🐳 Building and running frontend container..."
+            docker build -t frontend-app .
+            docker run -d --name ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} -p 3000:3000 frontend-app
 
-          echo "✅ Deployment complete."
-
-        EOF
+            echo "✅ Deployment finished successfully!"
+          EOF
