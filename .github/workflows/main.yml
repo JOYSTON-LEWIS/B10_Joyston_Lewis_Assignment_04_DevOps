@@ -37,11 +37,11 @@ jobs:
 
             echo "🧹 Cleaning old directories and Docker containers..."
             rm -rf ~/Backend ~/Frontend
-            docker stop ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
-            docker rm ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
-            docker stop ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
-            docker rm ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
-            docker system prune -f
+            sudo docker stop ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
+            sudo docker rm ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
+            sudo docker stop ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
+            sudo docker rm ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
+            sudo docker system prune -f
 
             ##########################################
             ## Backend Deployment
@@ -67,8 +67,8 @@ jobs:
             EOL
 
             echo "🐳 Building and running backend container..."
-            docker build -t backend-app .
-            docker run -d --name ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} -p 3001:3001 backend-app
+            sudo docker build -t backend-app .
+            sudo docker run -d --name ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} -p 3001:3001 backend-app
 
             ##########################################
             ## Frontend Deployment
@@ -96,8 +96,8 @@ jobs:
             EOL
 
             echo "🐳 Building and running frontend container..."
-            docker build -t frontend-app .
-            docker run -d --name ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} -p 3003:3000 frontend-app
+            sudo docker build -t frontend-app .
+            sudo docker run -d --name ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} -p 3003:3000 frontend-app
 
             echo "✅ Deployment finished successfully!"
           EOF
