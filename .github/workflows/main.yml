@@ -33,7 +33,9 @@ jobs:
               sudo apt install -y nodejs
             fi
 
-            command -v docker || curl -fsSL https://get.docker.com | sh
+            if ! command -v docker; then
+              curl -fsSL https://get.docker.com | sudo sh
+            fi
 
             echo "🧹 Cleaning old directories and Docker containers..."
             rm -rf ~/Backend ~/Frontend
@@ -55,15 +57,14 @@ jobs:
 
             echo "📝 Creating backend Dockerfile..."
             cat <<EOL > Dockerfile
-            FROM node:20-alpine
-            WORKDIR /app
-            COPY package*.json ./
-            RUN npm install --omit=dev
-            COPY . .
-            ENV PORT=3001
-            ENV MONGO_URI=${{ secrets.MONGO_DB_CLUSTER_SECRET_KEY }}
-            EXPOSE 3001
-            CMD ["node", "index.js"]
+              FROM node:20-alpine
+              WORKDIR /app
+              RUN npm install --omit=dev
+              COPY . .
+              ENV PORT=3001
+              ENV MONGO_URI=${{ secrets.MONGO_DB_CLUSTER_SECRET_KEY }}
+              EXPOSE 3001
+              CMD ["node", "index.js"]
             EOL
 
             echo "🐳 Building and running backend container..."
@@ -85,14 +86,14 @@ jobs:
 
             echo "📝 Creating frontend Dockerfile..."
             cat <<EOL > Dockerfile
-            FROM node:20
-            WORKDIR /app
-            COPY . .
-            RUN npm install
-            RUN npm run build
-            RUN npm install -g serve
-            EXPOSE 3000
-            CMD ["serve", "-s", "dist", "-l", "3000"]
+              FROM node:20-alpine
+              WORKDIR /app
+              COPY . .
+              RUN npm install
+              RUN npm run build
+              RUN npm install -g serve
+              EXPOSE 3000
+              CMD ["serve", "-s", "dist", "-l", "3000"]
             EOL
 
             echo "🐳 Building and running frontend container..."
