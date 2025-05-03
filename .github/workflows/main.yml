@@ -35,25 +35,26 @@ jobs:
 
             command -v docker || curl -fsSL https://get.docker.com | sh
 
-            echo "📁 Creating folders..."
-            mkdir -p ~/Backend ~/Frontend
+            echo "🧹 Cleaning old directories and Docker containers..."
+            rm -rf ~/Backend ~/Frontend
+            docker stop ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
+            docker rm ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
+            docker stop ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
+            docker rm ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
+            docker system prune -f
 
             ##########################################
             ## Backend Deployment
             ##########################################
             echo "📦 Cloning backend repo..."
+            mkdir -p ~/Backend
             cd ~/Backend
-            rm -rf B10_Joyston_Lewis_Assignment_04_DevOps
             git clone https://github.com/JOYSTON-LEWIS/B10_Joyston_Lewis_Assignment_04_DevOps
             cd B10_Joyston_Lewis_Assignment_04_DevOps
             git checkout Backend
 
-            echo "🛑 Stopping old backend container..."
-            docker stop ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
-            docker rm ${{ secrets.EC2_DOCKER_BACKEND_CONTAINER_NAME }} || true
-
             echo "📝 Creating backend Dockerfile..."
-            cat > Dockerfile <<EOL
+            cat <<EOL > Dockerfile
             FROM node:20-alpine
             WORKDIR /app
             COPY package*.json ./
@@ -73,32 +74,30 @@ jobs:
             ## Frontend Deployment
             ##########################################
             echo "📦 Cloning frontend repo..."
+            mkdir -p ~/Frontend
             cd ~/Frontend
-            rm -rf B10_Joyston_Lewis_Assignment_04_DevOps
             git clone https://github.com/JOYSTON-LEWIS/B10_Joyston_Lewis_Assignment_04_DevOps
             cd B10_Joyston_Lewis_Assignment_04_DevOps
             git checkout Frontend
-
-            echo "🛑 Stopping old frontend container..."
-            docker stop ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
-            docker rm ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} || true
 
             echo "🌍 Creating .env file for frontend..."
             echo "VITE_API_BASE_URL=http://${{ secrets.EC2_PRIVATE_IP }}:3001" > .env
 
             echo "📝 Creating frontend Dockerfile..."
-            cat > Dockerfile <<EOL
+            cat <<EOL > Dockerfile
             FROM node:20
             WORKDIR /app
             COPY . .
             RUN npm install
+            RUN npm run build
+            RUN npm install -g serve
             EXPOSE 3000
-            CMD ["npm", "run", "dev", "--", "--port", "3000", "--host"]
+            CMD ["serve", "-s", "dist", "-l", "3000"]
             EOL
 
             echo "🐳 Building and running frontend container..."
             docker build -t frontend-app .
-            docker run -d --name ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} -p 3000:3000 frontend-app
+            docker run -d --name ${{ secrets.EC2_DOCKER_FRONTEND_CONTAINER_NAME }} -p 3003:3000 frontend-app
 
             echo "✅ Deployment finished successfully!"
           EOF
